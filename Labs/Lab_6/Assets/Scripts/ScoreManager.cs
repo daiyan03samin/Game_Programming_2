@@ -26,7 +26,6 @@ public class ScoreManager : MonoBehaviour
             return;
         }
 
-
         // Otherwise, this is the one and only ScoreManager
         Instance = this;
     }
@@ -37,8 +36,19 @@ public class ScoreManager : MonoBehaviour
     {
         Score += amount;
 
-
         // Print the new total to the Console window
         Debug.Log("Score: " + Score);
     }
+
+    // "static" means this value belongs to the ScoreManager CLASS,
+    // not to one ScoreManager object. Objects are destroyed when a
+    // new scene loads, but static values stay in memory.
+    public static int FinalScore { get; private set; }
+
+    // Called just before we leave the level
+    public void SaveFinalScore()
+    {
+        FinalScore = Score;
+    }
+
 }
